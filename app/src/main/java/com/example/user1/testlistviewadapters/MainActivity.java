@@ -7,32 +7,33 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
     ListView listMyListView;
 
-    ArrayList<String> arrayList;
+    ArrayList<MyObject> arrayList;
 
-    ArrayAdapter<String> arrayAdapter;
+    MyAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         listMyListView = (ListView) findViewById(R.id.listMyListView);
 
         arrayList = new ArrayList<>();
 
-        for (int i = 0; i <= 100; i++) {
-            arrayList.add(i, "Element № " + String.valueOf(i + 1));
+        for (int i = 0; i <= 10000; i++) {
+            arrayList.add(new MyObject("Name1 №" + i, "Name2 №" + i, new Random().nextBoolean()));
         }
 
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.my_list_item, R.id.textItem, arrayList);
+        myAdapter = new MyAdapter(this, arrayList);
 
-        listMyListView.setAdapter(arrayAdapter);
-
+        listMyListView.setAdapter(myAdapter);
 
     }
 }
